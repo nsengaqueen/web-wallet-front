@@ -65,34 +65,16 @@ function TransactionDash() {
     setTransactionData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmitTransaction = async () => {
-    try {
-      await axios.post(
-        "http://localhost:5000/api/transactions",
-        transactionData
-      );
-      alert("Transaction added successfully!");
-      setModalOpen(false);
-      window.location.reload();
-    } catch (error) {
-      console.error("Error adding transaction:", error.message);
-    }
-  };
 
   return (
     <div className="p-6 bg-gray-50 min-h-screen">
       {/* Header Section */}
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-xl font-bold  flex items-center">
-          Transactions{" "}
+          Transactions Summary{" "}
           <MdOutlineFilterAlt className="ml-2 text-xl text-gray-600 cursor-pointer" />
         </h2>
-        <button
-          className="bg-[#FADADD]  hover:bg-[#FADADD] text-sm font-medium px-5 py-2 rounded-lg transition"
-          onClick={() => setModalOpen(true)}
-        >
-          + Add Transaction
-        </button>
+        
       </div>
 
       {/* Data Grid */}
@@ -112,86 +94,9 @@ function TransactionDash() {
       {modalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white w-[400px] p-6 rounded-lg shadow-lg relative">
-            <h3 className="text-lg font-bold text-[#0A1F95] mb-6">
-              Add Transaction
-            </h3>
+           
             <form className="space-y-4">
-              <div>
-                <label
-                  htmlFor="amount"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Amount
-                </label>
-                <input
-                  type="number"
-                  id="amount"
-                  name="amount"
-                  value={transactionData.amount}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#0A1F95]"
-                  placeholder="Enter amount"
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="type"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Type
-                </label>
-                <select
-                  id="type"
-                  name="type"
-                  value={transactionData.type}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#0A1F95]"
-                >
-                  <option value="expense">Expense</option>
-                  <option value="income">Income</option>
-                </select>
-              </div>
-              <div>
-                <label
-                  htmlFor="account"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Account
-                </label>
-                <select
-                  id="account"
-                  name="account"
-                  value={transactionData.account}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#0A1F95]"
-                >
-                  <option value="bank">Bank</option>
-                  <option value="mobile money">Mobile Money</option>
-                  <option value="cash">Cash</option>
-                </select>
-              </div>
-              <div>
-                <label
-                  htmlFor="category"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Category
-                </label>
-                <select
-                  id="category"
-                  name="category"
-                  value={transactionData.category}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#0A1F95]"
-                >
-                  <option value="">Select a category</option>
-                  {categories.map((category) => (
-                    <option key={category._id} value={category._id}>
-                      {category.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
+             
             </form>
             <div className="flex justify-end mt-6 space-x-3">
               <button
@@ -200,12 +105,7 @@ function TransactionDash() {
               >
                 Cancel
               </button>
-              <button
-                onClick={handleSubmitTransaction}
-                className="bg-green-500 text-white px-5 py-2 rounded-md hover:bg-green-600 transition"
-              >
-                Add Transaction
-              </button>
+             
             </div>
           </div>
         </div>
