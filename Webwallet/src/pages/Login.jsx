@@ -37,7 +37,7 @@ function Login() {
       <div className="bg-white shadow-lg rounded-lg overflow-hidden flex w-full max-w-3xl h-full">
         {/* Right Side - Login Form */}
         <div className="w-full  p-8 flex flex-col justify-center">
-          <h2 className="text-3xl font-bold text-[#681351] mb-6 text-center">
+          <h2 className="text-3xl font-bold mb-6 text-center">
             Welcome
           </h2>
           <p className="text-sm text-gray-600 mb-6 text-center">
@@ -56,7 +56,7 @@ function Login() {
               <input
                 type="text"
                 id="username"
-                className="w-full px-4 py-3 mt-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500"
+                className="w-full px-4 py-3 mt-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-pink-300 focus:border-pink-300"
                 placeholder="Enter your username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
@@ -73,7 +73,7 @@ function Login() {
               <input
                 type="password"
                 id="password"
-                className="w-full px-4 py-3 mt-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500"
+                className="w-full px-4 py-3 mt-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-pink-300 focus:border-pink-300"
                 placeholder="Enter your password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -83,18 +83,13 @@ function Login() {
             {error && <p className="text-sm text-pink-500">{error}</p>}
             <button
               type="submit"
-              className="w-full bg-[#681351] text-white py-3 rounded-md hover:bg-pink-500 transition"
+              className="w-full bg-[#ad4992] text-white py-3 rounded-md hover:bg-[#9e3e85] transition"
             >
               Sign In
             </button>
           </form>
 
-          <p className="text-sm text-gray-600 mt-6 text-center">
-            Don't have an account?{" "}
-            <a href="#" className="text-[#681351] hover:underline">
-              Register
-            </a>
-          </p>
+         
         </div>
       </div>
     </div>

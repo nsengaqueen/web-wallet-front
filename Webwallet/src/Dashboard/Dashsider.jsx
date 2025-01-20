@@ -4,11 +4,11 @@ import { FiHome, FiBarChart2, FiDollarSign, FiTag, FiSettings, FiLogOut } from "
 
 function Dashsider() {
   return (
-    <div className="bg-[#d35ab7] text-white h-screen w-64 shadow-lg flex flex-col">
+    <div className="bg-[#FADADD]  h-screen w-64 shadow-lg flex flex-col">
       {/* Logo Section */}
-      <div className="flex items-center justify-center h-20 border-b border-white/20">
-        <Link to="/" className="text-2xl font-bold">
-          My wallet
+      <div className="flex items-center p-10 h-20 border-b border-white/20">
+        <Link to="/" className="text-2xl  text-pink-500">
+          Wallet<span className="text-black">App </span>
         </Link>
       </div>
 
@@ -18,7 +18,7 @@ function Dashsider() {
           <li>
             <Link
               to="/dashboard"
-              className="flex items-center px-6 py-3 text-sm font-medium hover:bg-[#842452] transition"
+              className="flex items-center px-6 py-3 text-sm font-medium hover:bg-[#f5b8bf] transition"
             >
               <FiHome className="mr-3 text-lg" />
               Dashboard
@@ -27,7 +27,7 @@ function Dashsider() {
           <li>
             <Link
               to="/transactionss"
-              className="flex items-center px-6 py-3 text-sm font-medium  hover:bg-[#842452] transition"
+              className="flex items-center px-6 py-3 text-sm font-medium  hover:bg-[#f5b8bf] transition"
             >
               <FiDollarSign className="mr-3 text-lg" />
               Transactions
@@ -36,7 +36,7 @@ function Dashsider() {
           <li>
             <Link
               to="/reports"
-              className="flex items-center px-6 py-3 text-sm font-medium  hover:bg-[#842452] transition"
+              className="flex items-center px-6 py-3 text-sm font-medium  hover:bg-[#f5b8bf] transition"
             >
               <FiBarChart2 className="mr-3 text-lg" />
               Reports
@@ -45,19 +45,10 @@ function Dashsider() {
           <li>
             <Link
               to="/categories"
-              className="flex items-center px-6 py-3 text-sm font-medium  hover:bg-[#842452] transition"
+              className="flex items-center px-6 py-3 text-sm font-medium  hover:bg-[#f5b8bf] transition"
             >
               <FiTag className="mr-3 text-lg" />
               Categories
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/settings"
-              className="flex items-center px-6 py-3 text-sm font-medium  hover:bg-[#842452] transition"
-            >
-              <FiSettings className="mr-3 text-lg" />
-              Settings
             </Link>
           </li>
         </ul>
@@ -65,7 +56,7 @@ function Dashsider() {
 
       {/* Logout Section */}
       <div className="mt-auto">
-        <button className="flex items-center w-full px-6 py-3 text-sm font-medium text-white hover:bg-[#003F5F] transition">
+        <button className="flex items-center w-full px-6 py-3 text-sm font-bold hover:bg-[#f5b8bf] transition">
           <FiLogOut className="mr-3 text-lg" />
           Logout
         </button>
