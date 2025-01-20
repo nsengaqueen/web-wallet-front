@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import LL from "../assets/login.png";
+
 
 function Login() {
   const [username, setUsername] = useState("");
@@ -20,11 +20,11 @@ function Login() {
       });
 
       if (response.status === 200) {
-        // Handle successful login (e.g., save token to localStorage or context)
+       
         const token = response.data.token;
         localStorage.setItem("authToken", token);
 
-        // Navigate to the dashboard
+      
         navigate("/dashboard");
       }
     } catch (err) {
