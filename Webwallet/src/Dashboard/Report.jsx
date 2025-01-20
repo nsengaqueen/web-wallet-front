@@ -1,7 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Bar } from "react-chartjs-2";
-import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from "chart.js";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
 
 // Register the required Chart.js components
 ChartJS.register(
@@ -15,12 +23,14 @@ ChartJS.register(
 
 function Report() {
   const [transactions, setTransactions] = useState([]);
-  
+
   useEffect(() => {
-    // Fetching transaction data
+    // Fetching the transaction data
     const fetchTransactions = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/transactions");
+        const response = await axios.get(
+          "http://localhost:5000/api/transactions"
+        );
         if (response.status === 200) {
           setTransactions(response.data);
         }
@@ -35,13 +45,13 @@ function Report() {
   // Summarize the transactions by category (Income and Expense per category)
   const summarizeTransactionsByCategory = () => {
     const categories = {};
-    
-    transactions.forEach(transaction => {
+
+    transactions.forEach((transaction) => {
       const category = transaction.category.name;
       if (!categories[category]) {
         categories[category] = { income: 0, expense: 0 };
       }
-      
+
       if (transaction.type === "income") {
         categories[category].income += transaction.amount;
       } else {
@@ -50,13 +60,14 @@ function Report() {
     });
 
     const categoryNames = Object.keys(categories);
-    const incomeData = categoryNames.map(cat => categories[cat].income);
-    const expenseData = categoryNames.map(cat => categories[cat].expense);
+    const incomeData = categoryNames.map((cat) => categories[cat].income);
+    const expenseData = categoryNames.map((cat) => categories[cat].expense);
 
     return { categoryNames, incomeData, expenseData };
   };
 
-  const { categoryNames, incomeData, expenseData } = summarizeTransactionsByCategory();
+  const { categoryNames, incomeData, expenseData } =
+    summarizeTransactionsByCategory();
 
   const chartData = {
     labels: categoryNames,
@@ -64,28 +75,90 @@ function Report() {
       {
         label: "Income",
         data: incomeData,
-        backgroundColor: "rgba(0, 123, 255, 0.7)",
-        borderColor: "rgba(0, 123, 255, 1)",
+        backgroundColor: "rgba(75, 192, 192, 0.7)",
+        borderColor: "rgba(75, 192, 192, 1)",
         borderWidth: 1,
       },
       {
         label: "Expense",
         data: expenseData,
-        backgroundColor: "rgba(255, 99, 132, 0.7)",
-        borderColor: "rgba(255, 99, 132, 1)",
+        backgroundColor: "rgba(255, 159, 64, 0.7)",
+        borderColor: "rgba(255, 159, 64, 1)",
         borderWidth: 1,
       },
     ],
   };
 
+  const chartOptions = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "top",
+        labels: {
+          font: {
+            size: 14,
+            weight: "bold",
+          },
+          color: "#4A5568",
+        },
+      },
+      title: {
+        display: true,
+        text: "Income vs Expense by Category",
+        font: {
+          size: 18,
+          weight: "bold",
+        },
+        color: "#2D3748",
+      },
+    },
+    scales: {
+      x: {
+        ticks: {
+          color: "#4A5568",
+          font: {
+            size: 12,
+          },
+        },
+        grid: {
+          display: false,
+        },
+      },
+      y: {
+        ticks: {
+          color: "#4A5568",
+          font: {
+            size: 12,
+          },
+        },
+        grid: {
+          color: "rgba(200, 200, 200, 0.3)",
+        },
+      },
+    },
+  };
+
   return (
-    <div className="p-6 bg-gray-50 min-h-screen">
-      <div className="mb-4">
-        <h2 className="text-lg font-bold text-[#0A1F95]">Transaction Report by Category</h2>
+    <div className="p-8 bg-gradient-to-b from-blue-50 to-blue-100 min-h-screen">
+      {/* Header */}
+      <div className="mb-6">
+        <h2 className="text-2xl font-extrabold ">
+          Transaction Report by Category
+        </h2>
+        <p>
+          Visualize your income and expenses grouped by category.
+        </p>
       </div>
 
-      <div className="bg-white shadow rounded-lg p-4">
-        <Bar data={chartData} options={{ responsive: true, plugins: { legend: { position: "top" } } }} />
+      {/* Chart Container */}
+      <div className="bg-white shadow-lg rounded-lg p-6">
+        {categoryNames.length ? (
+          <Bar data={chartData} options={chartOptions} />
+        ) : (
+          <div className="text-center text-gray-500 font-medium">
+            No transaction data available to display.
+          </div>
+        )}
       </div>
     </div>
   );
